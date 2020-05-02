@@ -1,0 +1,3 @@
+insert into product (price,product_name,brand,apparal_type,design,product_category) values (10.0,'APPARAL1','brand1','type1','design1','A');
+insert into product (price,product_name,brand,apparal_type,design,product_category) values (20.0,'APPARAL2','brand2','type2','design2','A');
+insert into product (price,product_name,brand,apparal_type,design,product_category) values (30.0,'APPARAL3','brand3','type3','design3','A');

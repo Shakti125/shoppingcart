@@ -1,0 +1,88 @@
+       <div class="cart-wrap">
+		<div class="container">
+	        <div class="row">
+			    <div class="col-lg-8">
+			        <div class="main-heading">Shopping Cart</div>
+			        <div class="table-cart">
+	                    <table>
+	                        <thead>
+	                            <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+	                                <th>Quantity</th>
+	                                <th>Total</th>
+	                                
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                            <tr ng-repeat="p in products">
+	                                <td>
+	                                	<div class="display-flex align-center">
+		                                    <div class="name-product">
+		                                        {{p.productName}}
+		                                    </div>   
+	                                    </div>
+                                    </td>
+                                    <td>
+                                        <div class="price">
+                                            {{p.price | currency}}
+                                        </div>
+                                    </td>
+	                                <td class="product-count">
+	                                    <div class="count-inlineflex">
+										    <div class="qtyminus" ng-click = "removeProduct(p.productId,p.productCategory)">-</div>
+										    <input type="text" name="quantity" value="{{p.productQuantity}}" class="qty">
+										    <div class="qtyplus" ng-click = "addproduct(p.productId,p.productCategory)">+</div>
+										</div>
+	                                </td>
+	                                <td>
+	                                    <div class="total">
+	                                        {{p.price * p.productQuantity | currency}}
+	                                    </div>
+	                                </td>
+	                                
+	                            </tr>
+
+	                        </tbody>
+	                    </table>
+			        </div>
+			        <!-- /.table-cart -->
+			    </div>
+			    <!-- /.col-lg-8 -->
+			    <div class="col-lg-4">
+			        <div class="cart-totals">
+			            <h3>Cart Totals</h3>
+			            <form action="#" method="get" accept-charset="utf-8">
+			                <table>
+			                    <tbody>
+                                    <tr>
+			                            <td>Total Quantity</td>
+			                            <td class="subtotal">{{cartDetails.totalQuantity}}</td>
+			                        </tr>
+			                        <tr>
+			                            <td>Subtotal</td>
+			                            <td class="subtotal">{{cartDetails.totalPrice | currency}}</td>
+			                        </tr>
+			                        <tr>
+			                            <td>Shipping</td>
+			                            <td class="free-shipping">Free Shipping</td>
+			                        </tr>
+			                        <tr class="total-row">
+			                            <td>Total</td>
+			                            <td class="price-total">{{cartDetails.totalPrice | currency}}</td>
+			                        </tr>
+			                    </tbody>
+			                </table>
+			                <div class="btn-cart-totals">
+			                    <a ui-sref="orderplaced" class="checkout round-black-btn" title="">Proceed to Checkout</a>
+			                </div>
+			                <!-- /.btn-cart-totals -->
+			            </form>
+			            <!-- /form -->
+			        </div>
+			        <!-- /.cart-totals -->
+			    </div>
+			    <!-- /.col-lg-4 -->
+			</div>
+		</div>
+	</div>

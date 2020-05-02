@@ -1,0 +1,1 @@
+insert into user (user_name) values ('Shakti');
