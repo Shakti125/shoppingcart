@@ -1,11 +1,9 @@
-FROM ubuntu:18.04
-WORKDIR /tmp/docker
-RUN apt-get -y update && apt-get -y upgrade && apt-get -y install git
-RUN apt-get -y install openjdk-8-jdk
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
-RUN apt-get -y update && apt-get -y install maven
-RUN git clone https://github.com/Shakti125/shoppingcart.git
-RUN cd shoppingcart && mvn clean package -Dmaven.test.skip=true
-ADD target/shoppingcart.jar shoppingcart.jar
+FROM maven:3.6.3-openjdk-8 AS build
+COPY src /home/app/src
+COPY pom.xml /home/app
+RUN mvn -f /home/app/pom.xml clean package -Dmaven.test.skip=true
+
+FROM openjdk:8
+COPY --from=build /home/app/target/shoppingcart.jar /usr/local/lib/shoppingcart.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","shoppingcart.jar"]
+ENTRYPOINT ["java","-jar","/usr/local/lib/shoppingcart.jar"]

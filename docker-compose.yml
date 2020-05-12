@@ -1,0 +1,29 @@
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+
+version: '3.7'
+
+services:
+ db:
+  restart : always
+  container_name : mysqldb
+  image: mysql:8.0
+  environment:
+   - MYSQL_ROOT_PASSWORD=root
+  volumes:
+   - dbdata:/var/lib/mysql
+ web-service:
+  restart: on-failure
+  build:
+   context: ./
+  image: shakti125/shoppingcart:1.0
+  container_name : shoppingcart
+  expose:
+   - "8080"
+  ports:
+   - "8080:8080"
+  depends_on:
+   - db
+  volumes:
+   - D:/projects/logs:/log
+volumes:
+ dbdata:
