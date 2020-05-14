@@ -1,0 +1,17 @@
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+
+version: '3.7'
+
+services:
+ frontend:
+  restart: on-failure
+  build:
+   context: ./
+  image: shakti125/shoppingcart:1.2
+  container_name : myshoppingcart
+  expose:
+   - "8080"
+  ports:
+   - "8080:8080"
+  labels:
+    kompose.service.type: LoadBalancer

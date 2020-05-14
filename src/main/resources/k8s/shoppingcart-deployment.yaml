@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: shoppingcart-deployment
+ labels:
+  app: shoppingcart
+spec:
+ replicas: 3
+ selector:
+  matchLabels:
+   app: shoppingcart
+ template:
+  metadata:
+   labels:
+    app: shoppingcart
+  spec:
+   containers:
+    - name: myshoppingcart
+      image: shakti125/shoppingcart:1.2
+      ports:
+      - containerPort: 8080
+      volumeMounts:
+      - mountPath: /log
+        name: shoppingcartdatavol
+      resources:
+       limits:
+        cpu: 200m
+       requests:
+        cpu: 100m
+   volumes:
+   - name: shoppingcartdatavol
+     persistentVolumeClaim:
+      claimName: shoppingcartdata
